@@ -23,6 +23,7 @@ else
 	exit 0
 fi
 
+RETVAL=0
 # See how we were called.
 case "$1" in
   start)
@@ -32,13 +33,9 @@ case "$1" in
 		daemon rpc.bootparamd
 		touch /var/lock/subsys/rpc.bootparamd
 		RETVAL=$?
-		if [ $RETVAL -eq 0 ]; then
-			touch /var/lock/subsys/rpc.bootparamd
-			RETVAL=1
-		fi
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/rpc.bootparamd
 	else
 		msg_already_running rpc.bootparamd
-		exit 1
 	fi
 	;;
   stop)
@@ -48,19 +45,20 @@ case "$1" in
 		rm -f /var/lock/subsys/rpc.bootparamd >/dev/null 2>&1
 	else
 		msg_not_running rpc.bootparamd
-		exit 1
 	fi	
 	;;
   status)
 	status rpc.bootparamd
+	exit $?
 	;;
-  reload|restart|force-reload)
+  restart|force-reload)
 	$0 stop
 	$0 start
+	exit $?
 	;;
   *)
-	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
-	exit 1
+	msg_usage "$0 {start|stop|restart|force-reload|status}"
+	exit 3
 	;;
 esac
 
