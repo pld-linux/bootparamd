@@ -2,7 +2,7 @@ Summary:	A server process which provides boot information to diskless clients
 Summary(pl):	Demon zapewniaj±cy informacje potrzebne do uruchomienia bezdyskowych klientów
 Name:		bootparamd
 Version:	0.17
-Release:	10
+Release:	11
 License:	BSD
 Group:		Networking/Daemons
 Source0:	ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
