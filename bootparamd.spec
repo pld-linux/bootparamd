@@ -6,6 +6,7 @@ Release:	10
 License:	BSD
 Group:		Networking/Daemons
 Source0:	ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
+# Source0-md5:	00d211115b11aec2e214b701fe72f397
 Source1:	%{name}.init
 Patch0:		%{name}-install_man_fix.patch
 Prereq:		rc-scripts
