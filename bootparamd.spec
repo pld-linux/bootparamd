@@ -1,7 +1,7 @@
 Summary:	A server process which provides boot information to diskless clients
 Name:		bootparamd
 Version:	0.17
-Release:	6
+Release:	7
 License:	BSD
 Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
@@ -9,7 +9,8 @@ Group(pl):	Sieciowe/Serwery
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
 Source1:	%{name}.init
 Patch0:		%{name}-install_man_fix.patch
-Prereq:		/sbin/chkconfig
+Prereq:		rc-scripts
+Requires:	/sbin/chkconfig
 Requires:	portmap
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -30,7 +31,7 @@ clients and servers which need that boot server code.
 
 %build
 ./configure --with-c-compiler=%{__cc}
-%{__make} CFLAGS="%{?debug:-O0 -g}%{!?debug:$RPM_OPT_FLAGS}"
+%{__make} CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O0 -g}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
