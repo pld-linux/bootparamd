@@ -1,7 +1,7 @@
 Summary:	A server process which provides boot information to diskless clients
 Name:		bootparamd
 Version:	0.17
-Release:	0
+Release:	1
 License:	BSD
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
@@ -26,7 +26,7 @@ clients and servers which need that boot server code.
 %setup -q -n netkit-bootparamd-%{version}
 
 %build
-./configure
+./configure --with-c-compiler=gcc
 %{__make} CFLAGS="$RPM_OPT_FLAGS"
 
 %install
