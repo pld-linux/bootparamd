@@ -9,8 +9,8 @@ Source0:	ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/netkit-%{name}-%{ver
 # Source0-md5:	00d211115b11aec2e214b701fe72f397
 Source1:	%{name}.init
 Patch0:		%{name}-install_man_fix.patch
-Prereq:		rc-scripts
 Prereq:		/sbin/chkconfig
+Prereq:		rc-scripts
 Requires:	portmap
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -39,7 +39,8 @@ serwerami potrzebuj±cymi tego kodu.
 %patch -p1
 
 %build
-./configure --with-c-compiler=%{__cc}
+./configure \
+	--with-c-compiler=%{__cc}
 %{__make} CFLAGS="%{rpmcflags}"
 
 %install
