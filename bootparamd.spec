@@ -1,12 +1,14 @@
 Summary:	A server process which provides boot information to diskless clients
 Name:		bootparamd
 Version:	0.17
-Release:	1
+Release:	6
 License:	BSD
 Group:		Networking/Daemons
+Group(de):	Netzwerkwesen/Server
 Group(pl):	Sieciowe/Serwery
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
-Source1:	bootparamd.init
+Source1:	%{name}.init
+Patch0:		%{name}-install_man_fix.patch
 Prereq:		/sbin/chkconfig
 Requires:	portmap
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -24,10 +26,11 @@ clients and servers which need that boot server code.
 
 %prep
 %setup -q -n netkit-bootparamd-%{version}
+%patch -p1
 
 %build
-./configure --with-c-compiler=gcc
-%{__make} CFLAGS="$RPM_OPT_FLAGS"
+./configure --with-c-compiler=%{__cc}
+%{__make} CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -39,8 +42,6 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_mandir}/man8} \
 	MANDIR=%{_mandir}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/bootparamd
-
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man8/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -66,4 +67,4 @@ fi
 %attr(754,root,root) /etc/rc.d/init.d/bootparamd
 %attr(755,root,root) %{_sbindir}/rpc.bootparamd
 %attr(755,root,root) %{_bindir}/callbootd
-%{_mandir}/man8/*
+%{_mandir}/man[58]/*
