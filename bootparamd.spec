@@ -1,4 +1,5 @@
 Summary:	A server process which provides boot information to diskless clients
+Summary(pl):	Demon który zapewnia informacje potrzebne do uruchomienia bezdyskowych klientów
 Name:		bootparamd
 Version:	0.17
 Release:	7
@@ -31,7 +32,7 @@ clients and servers which need that boot server code.
 
 %build
 ./configure --with-c-compiler=%{__cc}
-%{__make} CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O0 -g}"
+%{__make} CFLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
