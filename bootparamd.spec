@@ -1,4 +1,4 @@
-Summary:	A server process which provides boot information to diskless clients.
+Summary:	A server process which provides boot information to diskless clients
 Name:		bootparamd
 Version:	0.16
 Release:	3
@@ -22,11 +22,8 @@ server code on the server, in addition to the rarp and tftp servers.
 This bootparamd server process is compatible with SunOS bootparam
 clients and servers which need that boot server code.
 
-You should install bootparamd if you need to provide boot information
-to diskless clients on your network.
-
 %prep
-%setup -q -n netkit-bootparamd-0.16
+%setup -q -n netkit-bootparamd-%{version}
 
 %build
 ./configure
@@ -34,14 +31,14 @@ to diskless clients on your network.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_mandir}/man8}
-install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_mandir}/man8} \
+	$RPM_BUILD_ROOT/etc/rc.d/init.d
 
 %{__make} install \
 	INSTALLROOT=$RPM_BUILD_ROOT \
 	MANDIR=%{_mandir}
 
-install -m 755 %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/bootparamd
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/bootparamd
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man8/*
 
@@ -50,10 +47,18 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/chkconfig --add bootparamd
+if [ -f /var/lock/subsys/rpc.bootparamd ]; then
+	/etc/rc.d/init.d/bootparamd restart 1>&2
+else
+	echo "Type \"/etc/rc.d/init.d/bootparamd start\" to start rpc.bootparamd sever" 1>&2
+fi
 
 %postun
-if [ $1 = 0 ]; then
-    /sbin/chkconfig --del bootparamd
+if [ "$1" = "0" ]; then
+	if [ -f /var/lock/subsys/rpc.bootparamd ]; then
+		/etc/rc.d/init.d/bootparamd stop 1>&2
+	fi
+	/sbin/chkconfig --del bootparamd
 fi
 
 %files
