@@ -49,20 +49,10 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/bootparamd
 rm -rf $RPM_BUILD_ROOT
 
 %post
-/sbin/chkconfig --add bootparamd
-if [ -f /var/lock/subsys/rpc.bootparamd ]; then
-	/etc/rc.d/init.d/bootparamd restart 1>&2
-else
-	echo "Type \"/etc/rc.d/init.d/bootparamd start\" to start rpc.bootparamd server" 1>&2
-fi
+DESC="rpc.bootparamd server"; %chkconfig_post
 
 %postun
-if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/rpc.bootparamd ]; then
-		/etc/rc.d/init.d/bootparamd stop 1>&2
-	fi
-	/sbin/chkconfig --del bootparamd
-fi
+%chkconfig_postun
 
 %files
 %defattr(644,root,root,755)
