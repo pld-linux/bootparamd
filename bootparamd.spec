@@ -31,7 +31,7 @@ to diskless clients on your network.
 %patch -p1
 
 %build
-make RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
+%{__make} RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -40,7 +40,7 @@ install -d $RPM_BUILD_ROOT%{_sbindir}
 install -d $RPM_BUILD_ROOT%{_mandir}/man1
 install -d $RPM_BUILD_ROOT%{_mandir}/man8
 install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
-make INSTALLROOT=$RPM_BUILD_ROOT install
+%{__make} INSTALLROOT=$RPM_BUILD_ROOT install
 install -m 755 $RPM_SOURCE_DIR/bootparamd.init $RPM_BUILD_ROOT/etc/rc.d/init.d/bootparamd
 
 %clean
