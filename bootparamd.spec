@@ -58,4 +58,4 @@ fi
 /usr/bin/callbootd
 /usr/man/man8/rpc.bootparamd.8
 /usr/man/man8/bootparamd.8
-%config /etc/rc.d/init.d/bootparamd
+%attr(754,root,root) /etc/rc.d/init.d/bootparamd
