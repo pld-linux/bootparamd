@@ -1,0 +1,50 @@
+#! /bin/sh
+#
+# chkconfig: - 60 20
+# description: The bootparamd server allows older Sun workstations to \
+#              net boot from Linux boxes. It (along with rarp) is rarely \
+#              used anymore; bootp and dhcp have mostly replaced both of them.
+# processname: rpc.bootparamd
+# config: /etc/bootparams
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Get config.
+. /etc/sysconfig/network
+
+# Check that networking is up.
+if [ ${NETWORKING} = "no" ]
+then
+	exit 0
+fi
+
+# See how we were called.
+case "$1" in
+  start)
+	echo -n "Starting bootparamd services: "
+	daemon rpc.bootparamd
+
+	echo
+	touch /var/lock/subsys/bootparamd
+	;;
+  stop)
+	echo -n "Stopping bootparamd services: "
+	killproc rpc.bootparamd
+
+	echo
+	rm -f /var/lock/subsys/bootparamd
+	;;
+  status)
+	status rpc.bootparamd
+	;;
+  restart|reload)
+	$0 stop
+	$0 start
+	;;
+  *)
+	echo "Usage: bootparamd {start|stop|status|restart|reload}"
+	exit 1
+esac
+
+exit 0
