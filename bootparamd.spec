@@ -75,6 +75,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
+%doc ChangeLog README
 %attr(754,root,root) /etc/rc.d/init.d/bootparamd
 %attr(755,root,root) %{_sbindir}/rpc.bootparamd
 %attr(755,root,root) %{_bindir}/callbootd
