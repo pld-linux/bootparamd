@@ -11,7 +11,7 @@ Source0:	ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/netkit-%{name}-%{ver
 Source1:	%{name}.init
 Patch0:		%{name}-install_man_fix.patch
 Prereq:		rc-scripts
-Requires:	/sbin/chkconfig
+Prereq:		/sbin/chkconfig
 Requires:	portmap
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -25,6 +25,15 @@ map. Some network boot loaders (notably Sun's) rely on special boot
 server code on the server, in addition to the rarp and tftp servers.
 This bootparamd server process is compatible with SunOS bootparam
 clients and servers which need that boot server code.
+
+%description -l pl
+Pakiet zawiera program bootparamd - demon, który zapewnia informacje
+potrzebne dla uruchomienia bezdyskowych klientów. bootparamd szuka
+w /etc/bootparams wpisu dla konkretnego klienta; je¿eli plik ten nie
+istnieje, szuka odpowiedniej mapy NIS. Niektóre sieciowe bootloadery
+(np. Suna) polegaj± na specjalnym kodzie bootuj±cym na serwerze. Ten
+bootparamd jest kompatybilny z klientami bootparam na SunOS-ie i
+serwerami potrzebuj±cymi tego kodu.
 
 %prep
 %setup -q -n netkit-bootparamd-%{version}
