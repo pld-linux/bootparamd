@@ -2,7 +2,7 @@ Summary:	A server process which provides boot information to diskless clients
 Summary(pl):	Demon który zapewnia informacje potrzebne do uruchomienia bezdyskowych klientów
 Name:		bootparamd
 Version:	0.17
-Release:	8
+Release:	9
 License:	BSD
 Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
@@ -28,8 +28,8 @@ clients and servers which need that boot server code.
 
 %description -l pl
 Pakiet zawiera program bootparamd - demon, który zapewnia informacje
-potrzebne dla uruchomienia bezdyskowych klientów. bootparamd szuka
-w /etc/bootparams wpisu dla konkretnego klienta; je¿eli plik ten nie
+potrzebne dla uruchomienia bezdyskowych klientów. bootparamd szuka w
+/etc/bootparams wpisu dla konkretnego klienta; je¿eli plik ten nie
 istnieje, szuka odpowiedniej mapy NIS. Niektóre sieciowe bootloadery
 (np. Suna) polegaj± na specjalnym kodzie bootuj±cym na serwerze. Ten
 bootparamd jest kompatybilny z klientami bootparam na SunOS-ie i
