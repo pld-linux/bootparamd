@@ -1,13 +1,12 @@
 Summary:	A server process which provides boot information to diskless clients.
 Name:		bootparamd
-Version:	0.10
-Release:	22
+Version:	0.16
+Release:	3
 License:	BSD
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
 Source0:	ftp://sunsite.unc.edu/pub/Linux/system/network/daemons/netkit-%{name}-%{version}.tar.gz
 Source1:	bootparamd.init
-Patch0:		netkit-bootparamd-0.10-misc.patch
 Prereq:		/sbin/chkconfig
 Requires:	portmap
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -27,21 +26,24 @@ You should install bootparamd if you need to provide boot information
 to diskless clients on your network.
 
 %prep
-%setup -q -n netkit-bootparamd-0.10
-%patch -p1
+%setup -q -n netkit-bootparamd-0.16
 
 %build
-%{__make} RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
+./configure
+%{__make} CFLAGS="$RPM_OPT_FLAGS"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_bindir}
-install -d $RPM_BUILD_ROOT%{_sbindir}
-install -d $RPM_BUILD_ROOT%{_mandir}/man1
-install -d $RPM_BUILD_ROOT%{_mandir}/man8
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_mandir}/man8}
 install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
-%{__make} INSTALLROOT=$RPM_BUILD_ROOT install
-install -m 755 $RPM_SOURCE_DIR/bootparamd.init $RPM_BUILD_ROOT/etc/rc.d/init.d/bootparamd
+
+%{__make} install \
+	INSTALLROOT=$RPM_BUILD_ROOT \
+	MANDIR=%{_mandir}
+
+install -m 755 %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/bootparamd
+
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man8/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -56,8 +58,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
+%attr(754,root,root) /etc/rc.d/init.d/bootparamd
 %attr(755,root,root) %{_sbindir}/rpc.bootparamd
 %attr(755,root,root) %{_bindir}/callbootd
-%{_mandir}/man8/rpc.bootparamd.8
-%{_mandir}/man8/bootparamd.8
-%attr(754,root,root) /etc/rc.d/init.d/bootparamd
+%{_mandir}/man8/*
