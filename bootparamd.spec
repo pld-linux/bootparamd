@@ -1,8 +1,8 @@
 Summary:	A server process which provides boot information to diskless clients
-Summary(pl):	Demon który zapewnia informacje potrzebne do uruchomienia bezdyskowych klientów
+Summary(pl):	Demon zapewniaj±cy informacje potrzebne do uruchomienia bezdyskowych klientów
 Name:		bootparamd
 Version:	0.17
-Release:	9
+Release:	10
 License:	BSD
 Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
@@ -65,7 +65,7 @@ else
 	echo "Type \"/etc/rc.d/init.d/bootparamd start\" to start rpc.bootparamd server" 1>&2
 fi
 
-%postun
+%preun
 if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/rpc.bootparamd ]; then
 		/etc/rc.d/init.d/bootparamd stop 1>&2
