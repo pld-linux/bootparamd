@@ -9,7 +9,7 @@ Source1: bootparamd.init
 Patch: netkit-bootparamd-0.10-misc.patch
 Prereq: /sbin/chkconfig
 Requires: portmap
-BuildRoot: /var/tmp/%{name}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 The bootparamd process provides bootparamd, a server process which
