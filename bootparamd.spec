@@ -49,10 +49,10 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/bootparamd
 rm -rf $RPM_BUILD_ROOT
 
 %post
-DESC="rpc.bootparamd server"; %chkconfig_post
+DESC="rpc.bootparamd server"; %chkconfig_add
 
 %postun
-%chkconfig_postun
+%chkconfig_addun
 
 %files
 %defattr(644,root,root,755)
