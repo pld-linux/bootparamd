@@ -1,11 +1,11 @@
 Summary:	A server process which provides boot information to diskless clients
 Name:		bootparamd
-Version:	0.16
-Release:	3
+Version:	0.17
+Release:	0
 License:	BSD
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
-Source0:	ftp://sunsite.unc.edu/pub/Linux/system/network/daemons/netkit-%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
 Source1:	bootparamd.init
 Prereq:		/sbin/chkconfig
 Requires:	portmap
