@@ -45,7 +45,7 @@ case "$1" in
 		rm -f /var/lock/subsys/rpc.bootparamd >/dev/null 2>&1
 	else
 		msg_not_running rpc.bootparamd
-	fi	
+	fi
 	;;
   status)
 	status rpc.bootparamd
