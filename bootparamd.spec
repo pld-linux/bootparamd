@@ -42,7 +42,7 @@ serwerami potrzebuj±cymi tego kodu.
 
 %build
 ./configure \
-	--with-c-compiler=%{__cc}
+	--with-c-compiler="%{__cc}"
 %{__make} CFLAGS="%{rpmcflags}"
 
 %install
