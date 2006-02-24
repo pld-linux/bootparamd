@@ -1,3 +1,5 @@
+# TODO
+# - unify lockfile and service name
 Summary:	A server process which provides boot information to diskless clients
 Summary(pl):	Demon zapewniaj±cy informacje potrzebne do uruchomienia bezdyskowych klientów
 Name:		bootparamd
@@ -9,9 +11,9 @@ Source0:	ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/netkit-%{name}-%{ver
 # Source0-md5:	00d211115b11aec2e214b701fe72f397
 Source1:	%{name}.init
 Patch0:		%{name}-install_man_fix.patch
-PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
 Requires:	portmap
+Requires:	rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -35,7 +37,7 @@ bootparamd jest kompatybilny z klientami bootparam na SunOS-ie i
 serwerami potrzebuj±cymi tego kodu.
 
 %prep
-%setup -q -n netkit-bootparamd-%{version}
+%setup -q -n netkit-%{name}-%{version}
 %patch -p1
 
 %build
