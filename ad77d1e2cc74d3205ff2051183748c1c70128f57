@@ -1,0 +1,5 @@
+- release 6,
+- added install_man_fix,
+- use %{__cc} macro instead directly gcc,
+- use new rpm automation,
+- added man pages level 5.
