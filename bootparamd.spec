@@ -1,16 +1,16 @@
-# TODO
-# - unify lockfile and service name
 Summary:	A server process which provides boot information to diskless clients
 Summary(pl):	Demon zapewniaj±cy informacje potrzebne do uruchomienia bezdyskowych klientów
 Name:		bootparamd
 Version:	0.17
-Release:	12
+Release:	13
 License:	BSD
 Group:		Networking/Daemons
 Source0:	ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
 # Source0-md5:	00d211115b11aec2e214b701fe72f397
 Source1:	%{name}.init
 Patch0:		%{name}-install_man_fix.patch
+BuildRequires:	cpp
+BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post,preun):	/sbin/chkconfig
 Requires:	portmap
 Requires:	rc-scripts
@@ -54,31 +54,25 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_mandir}/man8} \
 	INSTALLROOT=$RPM_BUILD_ROOT \
 	MANDIR=%{_mandir}
 
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/bootparamd
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/rpc.bootparamd
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-/sbin/chkconfig --add bootparamd
-if [ -f /var/lock/subsys/rpc.bootparamd ]; then
-	/etc/rc.d/init.d/bootparamd restart 1>&2
-else
-	echo "Type \"/etc/rc.d/init.d/bootparamd start\" to start rpc.bootparamd server" 1>&2
-fi
+/sbin/chkconfig --add rpc.bootparamd
+%service rpc.bootparamd restart "rpc.bootparamd server"
 
 %preun
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/rpc.bootparamd ]; then
-		/etc/rc.d/init.d/bootparamd stop 1>&2
-	fi
-	/sbin/chkconfig --del bootparamd
+	%service rpc.bootparamd stop
+	/sbin/chkconfig --del rpc.bootparamd
 fi
 
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog README
-%attr(754,root,root) /etc/rc.d/init.d/bootparamd
+%attr(754,root,root) /etc/rc.d/init.d/rpc.bootparamd
 %attr(755,root,root) %{_sbindir}/rpc.bootparamd
 %attr(755,root,root) %{_bindir}/callbootd
 %{_mandir}/man[58]/*
