@@ -38,7 +38,7 @@ serwerami potrzebuj±cymi tego kodu.
 
 %prep
 %setup -q -n netkit-%{name}-%{version}
-%patch -p1
+%patch0 -p1
 
 %build
 ./configure \
