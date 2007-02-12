@@ -1,5 +1,5 @@
 Summary:	A server process which provides boot information to diskless clients
-Summary(pl.UTF-8):   Demon zapewniający informacje potrzebne do uruchomienia bezdyskowych klientów
+Summary(pl.UTF-8):	Demon zapewniający informacje potrzebne do uruchomienia bezdyskowych klientów
 Name:		bootparamd
 Version:	0.17
 Release:	13
