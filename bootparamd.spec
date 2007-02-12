@@ -1,5 +1,5 @@
 Summary:	A server process which provides boot information to diskless clients
-Summary(pl):	Demon zapewniaj±cy informacje potrzebne do uruchomienia bezdyskowych klientów
+Summary(pl.UTF-8):   Demon zapewniajÄ…cy informacje potrzebne do uruchomienia bezdyskowych klientÃ³w
 Name:		bootparamd
 Version:	0.17
 Release:	13
@@ -27,14 +27,14 @@ server code on the server, in addition to the rarp and tftp servers.
 This bootparamd server process is compatible with SunOS bootparam
 clients and servers which need that boot server code.
 
-%description -l pl
-Pakiet zawiera program bootparamd - demon, który zapewnia informacje
-potrzebne dla uruchomienia bezdyskowych klientów. bootparamd szuka w
-/etc/bootparams wpisu dla konkretnego klienta; je¿eli plik ten nie
-istnieje, szuka odpowiedniej mapy NIS. Niektóre sieciowe bootloadery
-(np. Suna) polegaj± na specjalnym kodzie bootuj±cym na serwerze. Ten
+%description -l pl.UTF-8
+Pakiet zawiera program bootparamd - demon, ktÃ³ry zapewnia informacje
+potrzebne dla uruchomienia bezdyskowych klientÃ³w. bootparamd szuka w
+/etc/bootparams wpisu dla konkretnego klienta; jeÅ¼eli plik ten nie
+istnieje, szuka odpowiedniej mapy NIS. NiektÃ³re sieciowe bootloadery
+(np. Suna) polegajÄ… na specjalnym kodzie bootujÄ…cym na serwerze. Ten
 bootparamd jest kompatybilny z klientami bootparam na SunOS-ie i
-serwerami potrzebuj±cymi tego kodu.
+serwerami potrzebujÄ…cymi tego kodu.
 
 %prep
 %setup -q -n netkit-%{name}-%{version}
