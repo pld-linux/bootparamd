@@ -13,7 +13,7 @@ BuildRequires:	cpp
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post,preun):	/sbin/chkconfig
 Requires:	portmap
-Requires:	rc-scripts
+Requires:	rc-scripts >= 0.4.1.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
